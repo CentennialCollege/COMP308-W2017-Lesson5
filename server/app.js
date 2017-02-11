@@ -24,6 +24,7 @@ db.once('open', () => {
 });
 
 let index = require('./routes/index');
+let games = require('./routes/games');
 
 let app = express();
 
@@ -39,7 +40,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../client')));
 
-app.use('/', index);
+// route redirects
+app.use('/', index); // wildcard
+app.use('/games', games);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
